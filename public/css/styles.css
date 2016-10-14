@@ -1,0 +1,59 @@
+
+
+.btn-h1-spacing{
+  margin-top: 18px;
+}
+
+.form-spacing-top{
+  margin-top: 30px;
+
+}
+ /*Lekcija 41½ : Part 41½ - Styling our Comments [How to Build a Blog with Laravel 5 Series]
+   Stilizacija prikaza komentara u single.blade.php iz foldera 'blogg\resources\views\blog'
+ */
+.comment{
+  margin-bottom: 45px;
+}
+
+.author-image{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; 	
+  float: left;
+}
+
+.author-name{
+  float: left;
+  margin-left: 15px;
+}
+
+.author-name>h4{
+  margin: 5px 0px;
+}
+
+.author-time{
+  font-size: 11px;
+  font-style: italic;
+  color: #aaa;	
+}
+
+.comment-content{
+  clear: both;
+  margin-left: 65px; 
+  font-size: 16px;
+  font-height: 1.3em; 
+}
+
+.comments-title{
+  margin-bottom: 45px;	
+}
+
+.comments-title>span{
+  margin-right: 15px;	
+}
+
+
+
+
+
+

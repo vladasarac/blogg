@@ -1,0 +1,1056 @@
+YouTube tutorial " How to Build a Blog with Laravel 5  " 
+URL:  https://www.youtube.com/watch?v=R8B4og-BeCk&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija1: How to Build a Blog with Laravel - Part 1 (Exploring File Structure), 
+Link: https://www.youtube.com/watch?v=R8B4og-BeCk&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Napravio sam instalaciju Laravela u htdocs u folderu (komandom " composer create-project --prefer-dist laravel/laravel blogg 5.2.29 " u GIT BASHU) - 
+ -  blogg(ovaj koristi instalaciju koja se zov blog ali posto vec imam tu ja cu koristiti blogg), Promenio sam da se poziva preko url blogg.dev
+U nastavku je objasnjavao strukturu fajlova Laravela
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija2: Part 2 - What is MVC [How to Build a Blog with Laravel 5 Series], 
+Link: https://www.youtube.com/watch?v=8o_nA66D5EQ&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=2
+Objasnjava sta je MVC i slicno,  nista novo....
+(Dobro objasnjenje MVC-a Link: https://www.youtube.com/watch?annotation_id=annotation_3464663059&feature=iv&src_vid=8o_nA66D5EQ&v=1IsL6g2ixak )
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija3: Part 3 - Getting Started [How to Build a Blog with Laravel 5 Series]
+Link: https://www.youtube.com/watch?v=Xfgzdi4p7bo&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=3
+Opet je na pocetku pricao o tome gde su kontroleri, gde su modeli a gde vjuovi itd...
+Sada kao krecemo da pravimo blogg, u folderu 'blogg\resources\views' napravi novi vju : about.blade.php(koji ce kao biti about stranica blogg-a) i u njega prekopiraj - 
+ - welcome.blade.php samo promeni tekst da kaze <div>About Me</div><p>I like to make Laravel web apps!</p>, onda napravi rutu :Route::get('about', function(){ - 
+ - koja vraca vju about.blade.php (return view('about');) i napravi rutu  Route::get('contact', function(){ koja vraca vju contact.blade.php(napravi u views folderu - 
+ - vju contact.blade.php kooji je kao i about samo promeni malo tekst ono kao Contact me bla bla ...)
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija4: Part 4 - Controller Basics [How to Build a Blog with Laravel 5 Series]
+Link: https://www.youtube.com/watch?v=C87Pc-xh3xg&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=4
+U folderu 'blogg\resources\views' napravi folder pages i u njega ubaci vjuove welcome.blade.php, contact.blade.php i about.blade.php, zatim napravi kontroler - 
+ - PagesController koji ce u nasoj aplikaciji sluziti za prikazivanje staticnih vju-ova u njemu ce za sada biti 3 metoda :  getIndex( ) (koji prikazuje welcome vju) - 
+ - , getCopntact( ) (koji prikazuje contact vju ) i getAbout( ) (koji prikazuje about vju) ,   zatim prepravi routes.php da tri rute koje smo do sada napravili koje su - 
+ - pozivale ova 3 vjua sada pozivaju ove metode PagesControllera tako da ce ruta '/' pozivati getIndex( ) ,  ruta 'about' getAbout( ) i ruta 'contact' getContact() metod
+naravno na vrhu kontorlera mora pisati :   namespace App\Http\Controllers;
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija5: Part 5 - Passing Data to a View [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=m5QrPsivE-Y&index=5&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Slanje varijable tj podataka iz kontrolera u vju - 
+ - u getAbout( ) metodu PagesControllera napravi varijablu $full u kojoj je puno ime i prezime(Vlada Sarac) i metodom with() je posalji u vju about.blade.php kao - 
+ - varijablu $fullname (  return view('pages.about')->with("fullname", $full);  ) i u vjuu ga echouj u naslovu ( <div class="title">About {{$fullname}}</div> ) - 
+ - naravno u blade templateu se ne korist echo nego {{ }}
+Drugi nacin da se uradi isto to : return view('pages.about')->withFullname($fullname); (s tim sto se varijabla koja sadrzi ime i prezime sada zove $fullname - 
+ - i u kontroleru a ne samo $full a u vjuu netreba nista menjati)
+Takodje se moze u vju poslati array tako da napravi varijablu $email = 'vladasarac@hotmail.com' i napravi $data array u komce kljucevi biti 'email' i 'fullname' - 
+ - $data['email'] = $email; $data['fullname'] = $fullname; i posalji $data array u about.blade.php medjutim da bi se sada pristupilo podatcima u vjuu mora se ici - 
+ - kroz data array: <div class="title">About {{ $data['fullname'] }}</div> i <p>I like to make Laravel web apps!<br>Contact me at {{ $data['email'] }}</p>
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija5½: Part 5½ - Designing our Blog Pages [How to Build a Blog with Laravel 5 Series]
+Link: https://www.youtube.com/watch?v=czxuzH0kRHs&index=6&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Idi na bootstrap stranicu (link:  http://getbootstrap.com/getting-started/#download ) i uradi copy dela 'Basic Template' i paste-uj ga u welcome.blade.php
+Takodje sa iste stranice ( na vrhu ) iskopiraj linkove za bootstrap i jquery sa maxcdn-a i ubaci ih u welcome.blade.php gde treba
+Sa bottstrapove stranice u kojoj su primeri koda skini Bootstrap Default Navbar (link: http://getbootstrap.com/components/#navbar ) i paste-uj ga na pocetak - 
+ - <body> -a u welcome.blade.php(treba uneti odredjene promene , pogledaj predavanje)
+Takodje slicno treba uraditi u about.blade.php i contact.blade.php
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 6 : Part 6 - Layouts with Blade [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=_F7pciOgSZ0&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=7
+Sada cemo prepraviti ove vjuove da budu u blade fazonu :
+U folderu ' blogg\resources\views ' napravi fajl 'main.blade.php' koji ce biti osnovni layout na koji ce se kaciti drugi vjuovi(tj ovaj ce ih includovati )
+U njega prekopiraj welcome.blade.php i ostavi ceo <head>a u <body> obrisi sve osim <div class="container"> i iz njega obrisi sve i napisi @yield('content') - 
+ - posto cemo u drugim vjuovma obrisati navigaciju koja ce biti u main.blade.php i ostalo cemo staviti u section content i to cemo yieldovati u main.blade.php
+U welcome.blade.php obrisi sve sto ima u main.blade.php tj ostavi samo sadrzaj diva class="container" a to sto je ostalo ubaci u @section('content') koji - 
+ - ce biti yield-ovan u main.blade.php,  a na vrhu napisi @extends('main') tj da extenduje main.blade.php isto uradi u abot.blade.php i contact.blade.php
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 7: Part 7 - Partials with Blade [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=6MgZ11Rjlo0&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=8
+U main.blade.php layoutu yielduy u <head>-u sekciju stylesheets (  @yield('stylesheets')  ) i na dnu gde s eucitava javascript yielduy sekciju scripts - 
+ - (  @yield('scripts')  ) a u welcome.blade.php na vrhu doday @section('stylesheets') u kojoj je link ka nekom navodnom css fajlu koji je specifican samo za - 
+ - tu stranicu i na dnu napravi @section('scripts')  u kojoj js alertuje neku poruku tako da kad sada ucitamo welcome.blade.php un ce alertovatii to a na ostalim - 
+ - stranicama (about.blade.php i contact.blade.php) nece posto nemaj te sekcije('stylesheets' i 'scripts')
+sada cemo obrisati @sectione koje smo napravili u welcome.blade.php posto je ovo bilo samo demonstracije radi....
+Sada cemo koristiti @yield() i @section() da bi podesili <title> tag u <head>-u posto svaka stranica treba da ima jedinstven <title> tako da u main.blade.php - 
+ - layoutu u <title> prepravi da bude :  <title>Laravel Blogg @yield('title')</title> a na svakoj stranici napravi @section u kojoj ce biti definisan jedinstven title: 
+ - u welcome.blade.php - @section('title', '| Homepage') ,  u about.blade.php - @section('title', '| About') i u contact.blade.php - @section('title', '| Contact') - 
+ - ovde je specificno sto @section() nema @endsection nego se samo daje drugi argument funkcije
+Sada u folderu 'blogg\resources\views' napravi folder partials i u njemu fajl '_head.blade.php' i u njega prekopiraj ceo <head> iz main.blade.php layout-a a u -
+ - main.blade.php include-uj _head.blade.php ( @include('partials._head') ) tako da ce ceo <head> stranice biti u zasebnom fajlu koji glavni layout include-uje
+Isto to za navigaciju tj <nav> tag, na pocetku <body>-a include-uj _nav( @include('partials._nav') ) a u folderu  'blogg\resources\views\partials' napravi fajl - 
+ - '_nav.blade.php'  i u njega copy-paste-uj ceo <nav> iz main.blade.php  
+Isto to za footer koji ce biti u folderu 'blogg\resources\views\partials' u fajlu '_footer.blade.php'
+Isto za js fajlove napravi u 'blogg\resources\views\partials' fajl '_javascript.blade.phgp' i includeuj ga u main.blade.php ( @include('partials._javascript') )
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija8: Part 8 - Model Basics [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=0xvB6h5-jtI&index=9&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Prvo je 15 minuta pricao sta je baza...
+Sada cemo komandom " php artisan make:model Post --migration " u GITBASH-u napraviti model i miograciju za 'posts' tabelu -
+ -  (iako jos nismo napravili ni bazu ni tabele...)
+NASTAVAK U SLEDECOJ LEKCIJCI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija9:  Part 9 - Migration Basics [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=pR9frREjwDY&index=10&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+NASTAVAK PRETHODNE LEKCIJE
+Sada opet gnjavi sa dobro poznatim stvarima (prica sta je string, sta je integer itd...) jos uvek inje napravio bazu...
+Dodacemo u migraciju za 'posts' tabelu kolone 'title' i 'body' 
+Najzad ,  napravicemo bazu koja ce se zvati 'blogg' (u tutorijalu se zove blog ali posto se moja instalacija zove blogg i baza ce se zvati blogg) -
+ - podesi .env fajl u blogg instalaciji laravela da se poveze sa blogg bazom i onda komandom " php artisan migrate " u  GIT BASH-u pusti da odradi - 
+ - migracije tj napravi 'posts' , 'users' i one tabele koje ima po difoltu(pasword ressets i migration tabele)
+ 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 10: Part 10 - CRUD and RESTful Routes [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=_WUCOL-eV3o&index=11&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Sada cemo napraviti PostController(bice resource kontroler tj. imace predefinisane rute i metode za CRUD) ,  tako da kucaj komandu u GITBASH-u - 
+ - " php artisan make:controller PostController --resource "
+U routes.php dodaj rutu " Route::resource('posts', 'PostController'); " koja ce napraviti rute za PostController
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 11: Part 11 - "Create" function and Forms in Laravel [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=El4yziFuygQ&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=12
+U folderu 'blogg\resources\views' napravi folder 'posts' u kom ce biti vjuovi za rad sa postovima i u njemu fajl create.blade.php u kom ce biti forma za kreiranje - 
+ - novog posta, U njemu napisi da extenduje main.blade.php i napravi mu @section title za naslov taba ( @section('title', '| Create New Post') ) i section content - 
+ - u kom ce biti forma za kreiranje posta ( @section('content') )
+Sada cemo skinuti laravelcollective paket za forme sa stranice " https://laravelcollective.com/docs/5.2/html " (necu ovde detaljisati ako ti nekad treba prati instruk - 
+ - cije sa tutorijala a ima i u onom drugom tutorijalu isto to tako da nije nista novo)
+I zatim napravi formu koja ima input za Title posta, textarea za body posta i submit btn i zve to salje ruti 'posts.store ' tj store( ) metodu postController-a 
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 12:  Part 12 - Inserting Data and Validating [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=5j3fgiaSK4E&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=13
+Rad na store( ) metodu PostControllera  koji prima unos u formu za kreiranje novog posta u create.blade.php iz foldera 'blogg\resources\views\posts' i kad - 
+ - uradi validaciju unosa ako je sve u redu upisuje red u tabelu 'posts'
+Pre svega treba uvesti Post klasu(tj model) u PostController tako da na vrhu napisi ' use App\Post; '
+Validacija
+$this->validate($request, array(
+        'title' => 'required|max:255', // polje title je obavezno i maksimalno 255 karaktera 
+        'body'  => 'required'          // polje body je obavezno 
+));
+Zatim instanciraj Post klasu, uzmi userov unos i sacuvaj tj upisi red u tabelu 'posts':
+$post = new Post; // instanciraj Post klasu
+$post->title = $request->title; // uzmi naslov koji je user uneo
+$post->body = $request->body; // uzmi body koji je user uneo
+$post->save(); // upisi red u 'posts' tabelu
+I onda redirektuj na show( ) metod PostController-a koji prikazuje jedan post, a sada ce prikazati post koji smo upravo napravili posto cemo  mu poslati njegov id -
+ -  return redirect()->route('posts.show', $post->id);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 12½:  Part 12½ - Javascript Form Validation [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=JmvHTg0sy6o&index=14&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Validacija u JavaScriptu ( parsley library),  prvo treba skinuti js paket sa linka - http://parsleyjs.org/doc/download.html i sacuvati ga u folderu 'blogg\public\js' - 
+ - onda treba skinuti css sa linka - http://parsleyjs.org/src/parsley.css i sacuvati ga u folderu 'blogg\public\css', Zatim u create.blade.php napravi 2 sectiona - 
+ - 
+@section('stylesheets')     {{--ovaj section yielduje _head.blade.php--}}
+  {{!! Html::style('css/parsley.css') !!}}          {{--ucitaj css za parsley js validaciju koji je u folderu 'blogg\public\css'--}}
+@endsection
+i na dnu ispod @section('content')
+@section('scripts')          {{--ovaj section yielduje _head.blade.php--}}
+  {{!! Html::script('js/parsley.min.js') !!}}             {{--ucitaj js za parsley js validaciju koji je u folderu 'blogg\public\js'--}}
+@endsection
+Zatim u formi u create.blade.php za kreiranje novog posta u otvaranju forme dodaj  'data-parsley-validate' => '' tako da ce celo otvaranje izgledati ovako:
+{!! Form::open(array('route' => 'posts.store', 'data-parsley-validate' => '')) !!}
+a u inputu za text dodaj da je required i da je maxlength 255 - {{ Form::text('title', null, array('class' => 'form-control', 'required' => '', 'maxlength' => '255')) }} i 
+ - u textarea za body posta dodaj da je required - {{ Form::textarea('body', null, array('class' => 'form-control', 'required' => '')) }} i sada ce kad se submituje ako je - 
+ - lose popunjena forma blokirati sllanje u kontroler i izbacice error poruke 
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 13: Part 13 - Sessions & Flash Messages [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=-FMecyZs5Cg&index=15&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Na vrhu PostContolera uvezi klasu Session ( use Session; ) a u store metodu posle save() upisi u session flash poruku (session flash je sesija koja traje samo - 
+ - jedan request) koja ce biti prikazana useru kad uspesno unese novi post ( Session::flash('success', 'The blog post was successfully saved!'); ) jer onda ide -
+ - redirekt na show( ) metod koji ce prikazati upravo uneti post tako sto ce pozvati vju show.blade.php 
+Napravi vju show.blade.php u folderu 'blogg\resources\views\posts' koji ce za sada samo prikazivati "This is blog post" a kasnije cemo ga -
+ -  prepraviti da prikazuje upravo uneti post(kao i drugi vjuovi extenduje main layout i ima @section('title', '| View Post' i @section('content')) )
+Napravicemo novi partials vju '_messages.blade.php' koji cemo include-ovati u main.blade.php layout iznad @yield('content') ,  a u tom vjuu(_message.blade.php) - 
+ - proveravamo da li u sesiji ima nesto pod kljucem success i ako ima prikazujemo je:
+@if(Session::has('success'))     {{--ako u sesiji ima nesto pod kljucem success, a ima ako smo npr uneli novi post--}}
+  <div class="alert alert-success" role="alert">
+    <strong>Success:</strong>{{ Session::get('success') }}
+  </div>
+@endif
+Tako da ako je post unet i u sesiji ima 'success' _message.blade.php koji je icludeovan u main.blade.php ce prikazati poruku
+Zatim cemo takodje u _message.blade.php proveravati da li ima $errors-a (recimo ako nije prosla validacija u kontroleru) i prikazivati te errore, mada se nece - 
+ - desiti posto imamo parsley jQuery validaciju...
+@if(count($errors) > 0)
+  <div class="alert alert-danger" role="alert">
+    <strong>Errors:</strong>
+    <ul>
+      @foreach($errors->all() as $error)
+        <li>{{ $error }}</li>
+      @endforeach	
+    </ul>
+  </div>
+@endif
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+FAQs [How to Build a Blog with Laravel]
+Link:  https://www.youtube.com/watch?v=WzQb26QOmUM&index=16&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Pitanja gledalaca i odgovori
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 14:  Part 14 - Reading from our Database [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=0Qzi1yOoLBQ&index=17&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+U metodu show($id) PostCOntroller-a vadimo iz baze post po id-u koji je stigao ( $post = Post::find($id); ) i saljemo ga u vju show.blade.php da ga prikaze - 
+ - ( return view('posts.show')->withPost($post); // withPost sluzi da bi u vjuu $post imao ime $post)
+U vjuu show.blade.php dodaj kod koji cwe prikazati naslov posta (title kolonu 'posts' tabele )  i sadrzaj posta (body kolonu 'posts' tabele) - 
+ - <h1>{{ $post->title }}</h1> 
+   <p class="lead">{{ $post->body }}</p>
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 15: Part 15 - Working with Dates from Database [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=tXq4J2siGew&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=18
+U show.blade.php napravicem div koji prikazuje created_at i update_at kolone 'posts' tabele a ispod njih ce biti linkovi ka edit( ) i destroy( ) metodima -
+ -  PostController-a, nista novo...
+ 
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 16: Part 16 - Read our CRUD [How to Build a Blog with Laravel 5 Series]
+Link:  https://www.youtube.com/watch?v=G46p9E_rCO0&index=19&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Prvo cemo u index( ) metodu PostControllera ubaciti sve postove iz posts tabele u varijablu i poslati sve to u vju index.blade.php koji cemo napraviti - 
+ - $posts = Post::all(); // izvuci sve postove iz 'posts' tabele
+    return view('posts.index')->withPosts($posts); // posalji sve u vju index.blade.php iz foldera'blogg\resources\views\posts'
+Zatim cemo u folderu 'blogg\resources\views\posts' napraviti vju index.blade.php koji ce prikazivati sve postove i imace btn koji poziva create( ) -
+ -  metod PostController-a, naravno kao i svi drugi vjuovi u backendu aplikacije extenduje main.blade.php ima sekcije 'title' i 'content' i slicno...
+U folderu 'blogg\public\css' napravi fajl style.css i dodaj link za njega u fajlu _head.blade.php ( {{ Html::style('css/styles.css') }} ) koji je u folderu - 
+ - 'blogg\resources\views\partials' a u taj fajl cemo dodavati sta treba od css 
+Zatim nastavak rada u index.blade.php vjuu za prikaz svih postova, tako da cemo iterirati kroz $posts koji je stigao iz index( ) u PostController-u i tabeli -
+ - prikazati svaki post (bice kolone #(to je id  posta), title, body, created at i na kraju kolona sa linovima za view() i edit() (edit jos nije napravljen) - 
+ -  metode u PostControlleru ) 
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 16½ : Part 16½ - Fixing a Bug, Making Navigation States work [How to Build a Blog with Laravel Series]
+Link :  https://www.youtube.com/watch?v=qvDVm5U3pvE&index=20&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Popravljanje navigacije u _nav.blade.php treba svakom <li> elementu navigacije dodati da proverava na kojoj je stranici i ako je na toj dodaje mu klasu active - 
+ - koja boji pozadinu u tamnosivu boju da se razlikuje od drugih linkova, koristi se Laravelov metod Request::is( ), ceo kod - 
+<ul class="nav navbar-nav">
+          <li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Home</a></li>
+          <li class="{{ Request::is('about') ? 'active' : '' }}"><a href="/about">About</a></li>
+          <li class="{{ Request::is('contact') ? 'active' : '' }}"><a href="/contact">Contact</a></li>
+</ul>
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 17 : Part 17 - Model-Form Binding [How to Build a Blog with Laravel 5 Series]
+Link : https://www.youtube.com/watch?v=6TcnKqr7chU&index=21&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+U metodu edit( ) u PostControlleru treba izvuci post ciji je id stigao ( $post = Post::find($id);  ) i poslati ga u vju za editovanje edit.blade.php koji cemo napraviti - 
+ - u folderu 'blogg\resources\views\posts' ( return view('posts.edit')->withPost($post); ). Linkovi za editovanje su u tabeli u index.blade.php i u show.blade.php - 
+ - iz foldera  'blogg\resources\views\posts'.
+Napravi vju edit.blade.php u folderu 'blogg\resources\views\posts' i u njemu cemo napravitti formu za editovanje posta koji je stigao iz edit( ) metoda - 
+ - PostControllera, forma se otvara kao Form::model posto ce koristiti $post koji dolazi iz kontrrolera posto se imena polja u formi podudaraju sa imenima - 
+ - kolona u posts tabeli, forma - 
+ {!! Form::model($post, ['method'=>'PATCH','route' => ['posts.update', $post->id]]) !!}
+    <div class="col-md-8">
+      {{ Form::label('title', 'Title:') }}{{--input za naslov posta--}}
+      {{ Form::text('title', null, ["class" => "form-control input-lg"]) }}
+      {{ Form::label('body', 'Body:', ["class" => "form-spacing-top"]) }}{{--textarea za body posta--}}
+      {{ Form::textarea('body', null, ["class" => "form-control"]) }}
+Submit(tj Save Changes) i Cancel buttoni su u posebnom divu sa strane ali su i dalje deo forme, Cncel btn poziva show( ) metod PostControllera tj vraca na -
+ - show.blade.php dok Save Changes poziva update( ) metod postControllera i salje mu unos u formu ( Request $request ) i id posta
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 18 : Part 18 - Updating Form Data to Database [How to Build a Blog with Laravel 5 Series]
+Link : https://www.youtube.com/watch?v=kmCtXryFwDc&index=22&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Rad na update metodu postControllera
+Prvoradi validaciju 
+$this->validate($request, array(
+        'title' => 'required|max:255', // polje title je obavezno i maksimalno 255 karaktera 
+        'body'  => 'required'          // polje body je obavezno 
+)); 
+onda izvlacimo post iz post tabele po $id (koji stize kad se submituje forma u edit.blade.php za editovanje posta) i ubacujemo ga u $post varijablu - 
+ -$post = Post::find($id);
+Zatim uzimamao userov unos u formu i dajemo ga kolonama u posts tabeli i upisujemo updateovan red u tabelu 'posts'
+$post->title = $request->input('title');  	// uzmi userov input za title polje 
+$post->body = $request->input('body'); 	// uzmi userov input za body polje
+$post->save(); 	// updateuj posts tabelu tj red koji je izvadjen po $id
+Podesavamo success poruku u Session::flash koju _messages.blade.php treba da prikaze
+Session::flash('success', 'This post was seccessfully saved.');
+I na kraju redirectujemo na show.blade.php i saljemo mu $id posta da bi izvukao post koji smo upravo updateovali i prikaze ga  
+ return redirect()->route('posts.show', $post->id);
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 19 : Part 19 - Deleting Resources with CRUD [How to Build a Blog with Laravel 5 Series]
+Link : https://www.youtube.com/watch?v=D5-balLS_LM&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=23
+Brisanje postova kad se u show.blade.php klikne na btn Delete
+Prvo treba prepraviti u show.blade.php gde je delete bio samo btn link u formu koja samo ima submit btn 'Delete' ,  cela forma za brisanje iz show.blade.php -
+{!! Form::open(['route' => ['posts.destroy', $post->id], "method" => "DELETE"]) !!} {{--method mora biti 'DELETE' da bi radilo--}}
+    {!! Form::submit('Delete', ['class' => 'btn btn-danger btn-block']) !!}
+{!! Form::close() !!}
+Zatim u destroy( ) metodu PostControllera prvo treba naci post po id koji mu je stigao iz forme u show.blade.php( $post = Post::find($id); ), zatim ga brisemo - 
+ - ( $post->delete(); ), podesavamo Session::flash poruku koju ce prikazati _messages.blade.php( Session::flash('success', 'The post was successfully deleted.'); ) - 
+ - i redirektujemo na index.blade.php koji prikazuje sve postove ( return redirect()->route('posts.index'); ) tacnije redirectujemo na rutu posts.index koja poziva - 
+ - index( ) metod PostControllera koji ucitava vju index.blade.php  
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 20 : Part 20 - Pagination in Laravel [How to Build a Blog with Laravel 5 Series]
+Link : https://www.youtube.com/watch?v=CzoeFyIm9tc&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=24
+U index( ) metodu koji vadi sve postove iz 'posts' tabele doacemo paginaciju da vadi po 3 posta, tako da nece vise raditit: $posts = Post::all(); ,  nego ce raditi - 
+ - $posts = Post::orderBy('id', 'desc')->paginate(3); ,  takodje zbog orderBy('id', 'desc') ce prvo vaditi najnovije postove tj sa najvecim id pa nadole
+Takodje u vjuu index.blade.php koji prikazuje postove treba ispod tabele u kojoj se prikazuju postovi dodati linkove za paginaciju, ovako - 
+<div class="text-center">
+    {!! $posts->links() !!}
+</div> 
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 21 : Part 21 - Query Builder [How to Build a Blog with Laravel Series]
+Link : https://www.youtube.com/watch?v=xvPWtUpyHzM&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=25
+Rad na HOME page-u aplikacije tj na welcome.blade.php koji je u folderu 'blogg\resources\views\pages' koji ce prikazivati 4 zadnja posta i takodje rad u kontroleru - 
+ - PagesController.php koji prikazuje vjuove welcome.blade.php, about.blade.php i contact.blade.php
+U getIndex( ) metodu PagesController-a cemo prvo izvaditi 4 najnovija posta po datumu desc : $posts = Post::orderBy('created_at', 'desc')->limit(4)->get(); - 
+ - i poslacemo ih u vju welcome.blade.php da ih prikaze (to je kao home vju i URL je :  http://blogg.dev/) : return view('pages.welcome')->withPosts($posts);
+Zatim treba prepraviti welcome.blade.php da prikazuje postove poslate iz getIndex( ) metoda:
+@foreach($posts as $post)
+  <div class="post">
+    <h3>{{ $post->title }}</h3> {{--naslov posta--}}
+    <p>{{ substr($post->body, 0, 300) }} {{ strlen($post->body) > 300 ? "..." : "" }}</p> {{--body tj sadrzaj posta--}}
+    <a href="#" class="btn btn-primary">Read More</a>
+  </div>
+  <hr>
+@endforeach
+Na kraju iako nema veze sa ovim u show.blade.php koji prikazuje zaseban post dodacemo link koji vraca na index( ) metod PostControllera tj na index.blade.php - 
+ - koji prikazuje sve postove (tj paginaciju po 3 posta po stranici) link ide u div sa strane koji vec prikazuje linkove za Edit i Delete:
+<div class="row">
+   <div class="col-md-12">
+      {{ Html::linkRoute('posts.index', '<< See All Posts', [], ['class' => 'btn btn-default btn-block btn-h1-spacing']) }}  
+   </div>
+</div>{{--kraj div-a row--}} 
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 22 : Part 22 - Adding Slug URLs to Our Blog [How to Build a Blog with Laravel Series]
+Link : https://www.youtube.com/watch?v=XlPX3-lCkqU&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=26
+Da bi napravili slug URL-ove prvo treba 'posts' tabeli dodati kolonu slug, kucaj u GIT BASH-u " php artisan make:migration add_slug_to_posts " -
+ - i u funkciji up( ) ukucaj:
+Schema::table('posts', function($table){
+     $table->string('slug')->unique()->after('body'); // dodajemo kolonu slug u 'posts' tabelu (unique() je metod koji pravi index na koloni)
+});
+u down( ) metodu kucaj: (s tim sto se u fajlu composer.json mora dodati, u 'require dev' array, "doctrine/dbal"  da bi radilo brisanje samo jedne kolone i onda u -
+ - GIT BASH-u kucaj " composer update " da bi povukao taj paket(doctrine/dbal))
+ Schema::table('posts', function($table){
+    $table->dropColumn('slug'); // obrisi kolonu slug u 'posts' tabelu
+});
+Posto ce kolona slug koju smo dodali biti index moramo uraditi u GITBASH-u " php artisan migrate:refresh " pa cemo zbog toga izgubiti sve podatke iz tabele
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 23 : Part 23 - Adding Slugs to our Posts CRUD [How to Build a Blog with Laravel 5 Series]
+Link : https://www.youtube.com/watch?v=mM2bZiD06A0&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=27
+NASTAVAK PRETHODNE LEKCIJE
+U vjuu za kreiranje posta tj create.blade.php iz foldera 'blogg\resources\views\posts' treba u formi dodati input za slug 
+U store( ) metodu PostController-a dodati u validaciji da validira slug polje koje stize iz forme u create.blade.php ('slug'  => 'required|alpha_dash|min:5|max:255', ) - 
+ - i da ga upisuje u kolonu slug u posts tabeli ( $post->slug = $request->slug; )
+Takodje u show.blade.php dodaj da u divu sa strane prikazuje slug kolonu 'posts' tabele, takodje u edit.blade.php dodaj polje u formi za editovanje slug kolone - 
+ - Takodje u update( ) metodu dodaj validaciju za slug polje i da ga upisuje u kolonu slug u posts tabeli
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 24 : Parts 24 - Slugs in our URL Routes [How to Build a Blog with Laravel 5 Series]
+Link : https://www.youtube.com/watch?v=VqewG1lcjKw&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=28
+NASTAVAK PRETHODNE LEKCIJE
+Komandom " php artisan make:controller BlogController " u GIT BASH-u napravi BlogController
+U routes.php napravi rutu: " Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@getSingle'])->where('slug', '[\w\d\-\_]+'); " koja ce pozivati -
+ - getSingle( ) metod BlogController-a koji ce primati parametar $slug (where('slug', '[\w\d\-\_]+') definise koji se karakteri mogu naci u URL (sva slova, svi brojevi - 
+ - i - i _))
+U getSingle( ) metodu BLogCOntroller-a cemo izvuci post koristeci $slug koji je ukucan u URL i stigao preko rute 'blog/{slug}' tako sto cemo pretraziti 'posts' - 
+ - tabelu po slug koloni ( $post = Post::where('slug', '=', $slug)->first(); ) i onda cemo izvuceni post poslati u single.blade.php vju (koji cemo sad napraviti ) da ga - 
+ - prikaze
+Napravicemo folder blog u folderu 'blogg\resources\views' i u njemu fajl single.blade.php koji ce prikazivati post koji mu posalje getSingle( ) iz BlogControllera
+Tako da sada kad recimo ukucamo u URL 'blogg.dev/blog/drugi-post' getSingle( ) ce iz tabele 'posts' izvuci red kom je kolona slug = 'drugi-post' i poslati to u view - 
+ - single.blade.php koji ce ga prikazati (iskreno nije mi jasno cemu sluze ovi slugovi????) 
+Sada cemo korisiti ovaj metod (getSingle( ) ) tako sto cemo u welcome.blade.php koji prikazuje 4 najnovija posta i ispod njih button-e 'Read More' tim btn-ima - 
+ - dodati link da pozivaju getSingle(  ) i salju n\mu slug posta da prikaze ceo post u vjuu single.blade.php  - 
+ -    <a href="{{ url('blog/'.$post->slug) }}" class="btn btn-primary">Read More</a>
+Takodje u show.blade.php dodaj link ka blog.single ruti u divu sa strane <a href="{{ route('blog.single', $post->slug) }}">{{ route('blog.single', $post->slug) }}</a>
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 24 ½ : Part 24 ½ - Fixing a Slug Bug [How to Build a Blog with Laravel Series]
+Link : https://www.youtube.com/watch?v=TVDAghpKkWI&index=29&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+POPRAVLJANJE BUG-a IZ PRETHODNIH LEKCIJA
+Problem je bio pri editovaqnju posta u edit.blade.php tj u validaciji update( ) metoda PostCOntrollera posto kolona slug mora biti jedinstvena tako da ako slug - 
+ - nije menjan validacija je vracala error jer se podudarao sa vec postojecim u bazi i nije prolazilo tako da smo dodali if koji proverava da li je slug koji je stigao - 
+ - iz forme u edit.blade.php jednak slugu posta u bazi i ako jeste znaci da nije menjan i ne valira se ako nije jednak radi se validacija posto i dalje mora biti -
+ - jedinstven u tabeli ,  ceo kod za validaciju u update( ) metodu PostCOntroller-a : 
+$post = Post::find($id);
+ if($request->input('slug') == $post->slug){
+        $this->validate($request, array(
+        'title' => 'required|max:255', // polje title je obavezno i maksimalno 255 karaktera 
+        'body'  => 'required'          // polje body je obavezno 
+      ));   
+}else{ // ako je menjan slug validiraj ga, prvenstveno da bi bio unique
+        $this->validate($request, array(
+          'title' => 'required|max:255', // polje title je obavezno i maksimalno 255 karaktera 
+          // polje slug je obavezno,alpha_dash dozvoljava alfa-numericke karaktere najmaje 5 karaktera, najvise 255 i mora biti unique
+          'slug'  => 'required|alpha_dash|min:5|max:255|unique:posts,slug', 
+          'body'  => 'required'          // polje body je obavezno 
+        ));   
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 25 : Part 25 - Adding Features to our Blog Controller [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=SkVgSOUUGvg&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=30
+Napravicemo vju koji prikazuje SVE postove, prvo cemo napraviti rutu 'blog.index' koja ce pozivati getIndex( ) metod BlogController-a -
+ - Route::get('blog', ['as' => 'blog.index', 'uses' => 'BlogController@getIndex']);
+Zatim cemo napraviti getIndex( ) metod u BlogController-u koji ce izvlaciti po 5 postova iz 'posts' tabele i slati ih u index.blade.php vju iz foldera - 
+ - 'blogg\resources\views\blog' da ih prikazuje ceo metod :  
+ public function getIndex(){
+     $posts = Post::paginate(5);		 // izvuci po 5 postova iz 'posts' tabele
+     return view('blog.index')->withPosts($posts);		 // i salji ih u vju index.blade.php iz foldera 'blogg\resources\views\blog' 
+  }
+Zatim cemo u folderu 'blogg\resources\views\blog' napraviti vju index.blade.php koji ce prikazivati po 5 postova (posto getIndex(  ) radi paginaciju) - 
+ - u njemu nema nista novo samo iterira kroz $posts koji je poslao getIndex( ) i prikazuje ih ima link 'Read More' ka single.blade.php kom se salje slug posta - 
+ - i na dnu ima paginaciju 
+U navigaciji tj u fajlu '_nav.blade.php' iz foldera 'blogg\resources\views\partials' dodaj link ka blog.index ruti tj ka /blog ruti -
+ - <li class="{{ Request::is('blog') ? 'active' : '' }}"><a href="/blog">Blog</a></li> tako da sad u glavnoj navigaciji na stranici imamo link ka stranici koja prikazuje - 
+ - sve postove
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 26 : Part 26 - Authentication Theory and Overview [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=VcmKdC8VuJ8&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=31
+Samo teorija sta je autentifikacija ,  kako se radi u laravelu ,  users i password_resets tabele itd,  nista novo...
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 27 : Part 27 - Laravel Authentication Routes Views [How to Build a Blog with Laravel Series]
+Link :  https://www.youtube.com/watch?v=CYvFCDq8jiw&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=32
+NASTAVAK PRETHODNE LEKCIJE
+U routes.php napravi rute za registraciju i login i logout, koje pozivaju metode AutControllera koji je vec u laravelu u folderu 'blogg\app\Http\Controllers\Auth' -
+ - ali metodi koje ove rute pozivaju nisu u AuthControlleru vec u nekim klasama koje on extenduje, takodje ove rute moraju ovako izgledati da bi radilo : 
+//  rute za login i logout
+Route::get('auth/login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+Route::get('auth/login', 'Auth\AuthController@getLogout');
+//  rute za registraciju
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+Zatim treba napraviti vjuove u kojima ce biti forme za registraciju i login, napravicemo folder 'auth' u folderu 'blogg\resources\views\' i u njemu vjuove -
+ - login.blade.php i register.blade.php
+U login.blade.php napravicemo formu za login(polja su email, password remember me checkbox i submi btn), URL za ovaj vju je " blogg.dev/auth/login " - 
+ - a getLogin( ) metod koji poziva ruta auth/login je u fajlu AuthenticatesUser.php u folderu 'blogg\vendor\laravel\framework\src\Illuminate\Foundation\Auth' - 
+ - a klasa AuthController extenduje tu klasu (pretpostavljam posto mi pozivamo getLogin( ) metod AuthController-a )
+U register.blade.php napravicemo formu za registrovanje usera ima polja - name, email, password, password_confirmation i submit ,   URL koji je poziva je -
+ - " blogg.dev/auth/register " tj poziva rutu Route::get('auth/register', 'Auth\AuthController@getRegister'); a posto nema getRegister( ) metoda u AuthControlleru - 
+ - pretpostavljam da je taj metod u nekoj klasi koju extenduje AuthController
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 28 : Part 28 - Authentication Methods [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=d9jd9HbQ_CU&index=33&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+NASTAVAK PRETHODNE LEKCIJE
+Ako sada ofemo na vju za registraciju i popunimo formu napravicemo unos u 'users' tabelu i imacemo napravljenog usera posto je ceo proces registracije vec - 
+ - ugradjen u Laravel (tako da cemo napraviti usera: Vlada Sarac, vladasarac@hotmail.com, pikolo ...)
+U kontroleru AuthController.php koji je u folderu 'blogg\app\Http\Controllers\Auth' promeni na liniji 41 da pise :
+ - '  $this->middleware($this->guestMiddleware(), ['except' => 'getLogout']);  ' da bi radio logout tako da kada odemo na URL " blogg.dev/auth/logout " tj pozovemo - 
+ - rutu za logout i uradi logout
+U main.blade.php layoutu cemo ispod include-a za partials._messages dodati if koji proverava da li smo ulogovani ili nismo i ispisuje na ekranu "Logged In" ili -
+ - "Logged Out" :     {{ Auth::check() ? "Logged In" : "Logged Out" }}, 
+Auth::check( ) ako dobro shvatam vraca TRUE ili FALSE u zavisnosti da li je user ulogovan
+Takodje postoji i metod Auth::guest( ) koji vraca TRUE ako user nije ulogovan tj ako je gost,
+Takodje postoji i metod Auth::user( ) kojim se moze pristupiti userovim informacijama iz tabele 'users' (ime, email i slicno) 
+Takodje postoji i metod Auth::id( ) koji vraca userov id iz tabele 'users' ,
+Postoji jos dosta Auth:: metoda ali ih je vecina neupotrebljiva pri normalnom radu
+Login cemo koristiti da bi zastitili metode PostControllera tj one u kojima se pisu, brisu i edituju postovi a PagesController i BLogController ce biti dostupni svima
+Na vrhu PostControllera cemo napraviti __construct u kom ce pisati da metodima kontrolera pristup imaju samo ulogovani useri tj oni koji su prosli kroz -
+ - auth middleware: 
+public function __construct(){
+      $this->middleware('auth');
+}
+tako da ako sada ako nismo ulogovani klinemo na link 'posts' u 'My Acount' dropdown meniju na desnoj strani tj ukucamo URL 'http://blogg.dev/posts'  - 
+ - izbace na error isto ce biti i ako odemo na npr. 'blogg.dev/posts/6' ili 'blogg.dev/posts/6/edit' posto se tim stranicam za edit i create postova pristupa iz -
+ - PostControllera koji je sada u Auth middleware-u i mora se biti ulogovan da mu se pristupi  
+Zatim cemo u fajlu Authenticate.php (folder 'blogg\app\Http\Middleware') promeniti liniju 24 da pise return redirect()->guest('auth/login'); i sada ce ako probamo da -
+ -  pristupimo metodima koji su u postController-u umesto da nam izbaci error da trazimo ne postojecu stranicu raditi redirect na rutu koja prikazuje login formu -
+ - ( problem je bio, ovaj tako kaze,sto imaju bug u laravelu i pozivao je rutu 'login' koja ne postoji a sada smo prepravili da poziva rutu 'auth/login' koja postoji - 
+ - i prikazuje login.blade.php ) 
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 29 : Part 29 - Authentication User Experience [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=Zxmf0n2sC1I&index=34&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+NASTAVAK PRETHODNE LEKCIJE
+Prepravili smo vju _nav.blade.php da proverava da li smo ulogovani  ( @if(Auth::check()) ) i ako jesmo na desnoj strani navigacije prikazuje dropdown meni sa -
+ - linkovima a ako nismo prikazuje dugme za login, takodje smo ruti za login dali name i sada se zove login -
+ - Route::get('auth/login', ['as' => 'login', 'uses' => 'Auth\AuthController@getLogin']); tako da kad se klikne link LogIn poslace nas na login.blade.php
+Takodje smo ruti za logout dali ime logout -
+ - Route::get('auth/logout', ['as' => 'logout', 'uses' => 'Auth\AuthController@getLogout']); i u _nav.blade.php smo dodali u dropdown meniju (koji je vidljiv samo ako -
+ - smo ulogovani ) link za logout koji poziva rutu logout - <li><a href="{{ route('logout') }}">Logout</a></li>
+Takodje smo promenili link koji izbacuje dropdown da sada pise Hello UserName tj ime usera koji je trenutno ulogogvan - 
+ - <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+       Hello {{ Auth::user()->name }}
+   <span class="caret"></span></a>
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 30 : Part 30 - Password Reset Emails [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=duMmNEJEZCw&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=35
+NASTAVAK PRETHODNE LEKCIJE
+Napravicemo rute u routes.php potrebne za resetovanje  passworda
+//ruta koja prikazuje formu za resetovanje passworda
+Route::get('password/reset/{token?}', 'Auth\PasswordController@showResetForm');
+// ruta poziva metod koji salje mail
+Route::post('password/email', 'Auth\PasswordController@sendResetLinkEmail');
+// ruta poziva metod koji resetuje password
+Route::post('password/reset', 'Auth\PasswordController@reset');
+Sada treba napraviti vjuove to cemo uraditi tako sto cemo u folderu 'blogg\resources\views\auth\' napraviti podfolder 'passwords' i u njemu fajlove :email.blade.php - 
+ - i reset.blade.php
+U email.blade.php napravicemo formu za slanje maila u slucaju zaboravljaja passworda za login koja ima polje za unos emaila i submit btn,  ova forma za razliku - 
+ - od login forme pri otvaranju mora imati url kom se salje POST zahtev - {!! Form::open(['url' => 'password/email', 'method' => 'POST']) !!}
+U reset.blade.php napravicemo formu koju ce user popunjavati ako mu stigne mail od laravela i u kojoj treba da popuni polja za novi pass i da ga potvrdi - 
+ - otvaranje forme :  {!! Form::open(['url' => 'password/reset', 'method' => 'POST']) !!} 
+Sada cemo u folderu 'blogg\resources\views\auth' napraviti podfolder 'emails' i u njemu fajl password.blade.php koji ce u stvari biti email koji cemo slati useru koji -
+ - je zaboravio password,  u njemu je samo link koji user treba da klikne i pozove 'password/reset' rutu i taj fajl izgleda ovako:
+Click Here to Reset your Password: <br>
+<a href="{{ $link = url('password/reset', $token).'?email='.urlencode($user->getEmailForPasswordReset()) }}">
+	{{ $link }}
+</a>
+Takodje u lgon.blade.php ispod submit btn dodacemo link "Frogot My Password" koji kad kliknemo poziva email.blade.php tj rutu 'password/reset'
+<p><a href="{{ url('password/reset') }}">Forgot My Password</a></p>
+Za slanje mailova koristicemo mailtrap.io (vec imam nalog username: vladasarac@hotmail.com, pass: pikolo), tako da treba podesiti .env fajl, ali ovaj ce dati i -
+ - objasnjenje kako da se salje preko gmaila pa cu probati tako posto sam u prethodnim tutorijalima raio sa ovim mailtrap.io njesra
+.env fajl tj deo za email ako se salje preko gmaila - 
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=25
+MAIL_USERNAME=kantarion35@gmail.com
+MAIL_PASSWORD=pikolopikolo
+MAIL_ENCRYPTION=tls
+Takodje VAZNO treba na google account-u podesiti da dozvoljava pristu za 'less secure applications' ,  link pa prati uputstva(ovo je na kraju):
+https://myaccount.google.com/privacycheckup/1?continue=https%3A%2F%2Fmyaccount.google.com%2F%3Futm_source%3DOGB&utm_source=OGB
+u fajlu mail.php koji je u folderu '\blogg\config' dodaj na liniji 58 u from array sledece - 'from' => ['address' => 'nekiemail@vlada.com', 'name' => 'Vlada Laravel'], - 
+ - ovako mora da bi radilo (naravno mogu se uneti i neke druge vrednosti ...), pre probe mora se resetovati apach server
+VAZNO Promeniti u fajlu PasswordController.php iz foldera 'blogg\app\Http\Controllers\Auth' na vrhu dodati na koju stranicu da radi -
+ - redirect kad resetuje password (reci cemo mu da redirektuje na pocetnu stranicu tj '/') :  " protected $redirectTo = '/';  "
+Sve radi kako treb samo treba, znaci kad se klikne da smo zaboravili pass u formi upisemo email(vladasarac@hotmail.com), zatim odemo na hotmail i u mailu koji - 
+ - smo dobili sa kantarion35@gmail.com je link koji kad kliknemo nas vodi na vju reset.blade.php koji treba popuniti tj ukucati novu sifru , potvrditi je i onda -
+ - submitovati i sifra je promenjena i salje nas na pocetnu stranicu aplikacije.
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 30½ : Part 30½ - Authentication Shortcut [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=zun7yHyoNJ0&index=36&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+NASTAVAK PRETHODNE LEKCIJE
+U ovoj lekciji je napravio novu instalaciju laravela i pokazivao kako se komandom u composeru " php artisan make:auth " pravi laravelova built-in autentifikacija
+Vec sam radio ovo u prethodnim tutorijalima tako da sada necu...
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 31 : Part 31 - Blog Categories and Learning Relationships [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=oPc5ijQXq2s&index=37&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Prvo je objasnjavao sta su relacije izmedju tabela u bazi...
+Pravicemo tabelu za kategorije da bi svaki post mogao da ima kategoriju tako da cemo prvo praviti migraciju i model tako da kucamo u GIT BASHU komandu - 
+ - " php artisan make:model Category " da napravi model za categories tabelu i onda cemo praviti migraciju komandom -
+ - " php artisan make:migration create_categories_table  --create=categories ", u ovu migraciju dodacemo samo kolonu name ( $table->string('name'); )
+Posto u tabelu 'posts' treba da dodamo kolonu categories_id napravicemo migraciju za to komandom u GIT BASHU  tj composeru -
+ - " php artisan make:migration add_category_id_to_posts --table=posts ", ovde kucamo - ( $table->integer('category_id')->nullable()->after('slug')-.unsigned(); ) -
+ - rekli smo da je nullable da ne bi morali da radimo refresh svih migracija posto vec postoje postovi u 'posts' tabeli koji nemaju category_id
+Rekao je da mozemo dodati foreign key ovako - $table->foreign('category_id')->references('id')->on('categories');  ali on nece posto ce raditi isto u svakom slucaju - 
+ - ali ce ovo kao usporiti bla bla itd...
+Zatim komandom " php artisan migrate " migriramo 'categories' tabelu i dodajemo kolonu category_id 'posts' tabeli
+U Category.php modelu napravicemo metod posts( ) kojim cemo napraviti one-to-many relaciju izmedju 'categories' i  'posts' tabela - 
+public function posts(){
+     return $this->hasMany('App\Posts');
+}
+Zatim je ovaj napravi u Post.php modelu metod category( ) koji govori da 'posts' belongsTo 'categories' ,  mada mislim da ovo nije neophodno posto je relacija -
+ - napravljena u Category.php modelu.... mada ga je u sustini napravio da bi kroz Post model tj recimo $post objekat u vjuovima imao pristup categories tabeli -
+ - i mogao da stampa imena kategorija postova bez da ih zasebno izvlaci iz baze nego to radi kroz post.php model
+public function category(){
+    return $this->belongsTo('App\Category');
+}
+Zatim cemo manuelno ubaciti u categories tabelu 2 kategorije i u posts tabeli dati postovima kategorije popunivsi category_id kolonu
+Zatim cemo u single.blade.php koji prikazuje po jedan post dodati i da ispod posta prikazuje kategoriju posta koristeci category( ) metod Post kontrolera -
+ -  <p>Posted In: {{ $post->category->name }}</p> , 
+$post stize iz BlogControllera i on samo izvlaci jedan post ali posto su sada tabele povezane mozemo pristupiti kategorijama kroz category( ) metod -
+ -  Post.php modela...
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 32 : Part 32 - Categories CRUD [How to Build a Blog with Laravel Series]
+Link :  https://www.youtube.com/watch?v=YddUdqX-nCI&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=38
+Rad na prikazu postojecih i kreiranju novih kategorija
+Komandom " php artisan make:controller CategoryController --resource " u GIT BASH-u napravicemo resource kontroler CategoryController koji ce kontrolisati -
+ -  upis rditovanje, brisanje itd kategorija u aplikaciji
+posto cemo index( ) metod ovog kontrolera koristiti i da prikaze postojece kategorije i da ponudi formu za kreiranje nove obrisacemo metod create( ) koji je po -
+ - difoltu trebao da zove vju koji prikazuje formu za kreiranje nove kategorije
+posto imamo autentifikaciju u aplikaciji tj register i LogIn usera, ovom kontroleru ce pristup imati samo ulogovani useri tj samo registrrovani ce moci da se igraju -
+ -  sa kategorijama, zato na vrh CategoryController-a dodajemo __construct u kom kazemo da je kontroler u auth middleware-u
+public function __construct(){
+      $this->middleware('auth');
+}
+Takodje mu na vrhu uvez Category.php model - use App\Category;
+U index( ) metodu prvo izvuci sve kategorije iz 'categories' tabele i posalji ih u vju index.blade.php iz foldera 'blogg\resources\views\categories' koji cemo tek -
+ - napraviti i u kom ce biti i forma za kreiranje nove kategorije 
+$categories = Category::all();
+return view('categories.index')->withCategories($categories);
+Zatim cemo u routes.php napraviti rute za CategoryController ( Route::resorce('categories', 'CategoryController', ['except' => ['create']]); ) except na kraju sluzi da - 
+- kaze Laravelu da ne pravi rutu za create( ) metod CategoryController-a posto smo ga obrisali a index( ) metod ce raditi njegov posao
+U vjuu _nav.blade.php cemo u dropdown listi sa desne strane ispod linka za postove dodati link koji poziva categories.index rutu tj index( ) metod CategoryContro -
+ - llera ( <li><a href="{{ route('categories.index') }}">Categories</a></li> )
+Zatim cemo u folderu 'blogg\resources\views\' napraviti folder 'categories' i u njemu vju index.blade.php koji ce da prikazuje postojece kategorije i nudi kreiranje -
+ -  novih (nista novo extenduje 'main' layout ima 'content' section i slicno imace tabelu i u njoj foreach petlju koja iterira kroz $categories koji je stigao iz index( ) -
+ - metoda CategoryControllera i u <table> brikazuje postojece kategorije, pored tabele je mali div u kom je forma za kreiranje nove kategorije koja ima samo polje - 
+ - za ime nove kategorije i submit btn , forma poziva store( ) metod CategoryControllera tj rutu categories.store )
+U store( ) metodu CategoryControllera koji ce primiti unos u formu u index.blade.php za prikaz kategorija i dodavanje novih prvo radimo validaciju unosa -
+ - polje name je required i max 250 karaktera i zatim upisujemo red u 'categories' tabelu - 
+$category = New Category;
+$category->name = $request->name;
+$category->save();
+// upisujemo u session flash poruku koju ce prikazati _messages.blade.php
+Session::flash('success', 'New Category Has Been Created.');
+// redirectujemo na vju index.blade.php iz foldera 'blogg\resources\views\categories'
+return redirect()->route('categories.index');
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 33 : Part 33 - Assigning Categories to Posts [How to Build a Blog with Laravel Series]
+Link :  https://www.youtube.com/watch?v=Bo3m_h0QYkU&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=39
+Dodacemo biranje kategorije pri kreiranju posta, prvo cemo u create( ) metod PostControllera koji ucitava create.blade.php za kreitranje posta izvuci iz -
+ - 'categories' tabele u bazi sve kattegorije i poslati ih u vju ( $categories = Category::all();  ,  return view('posts.create')->withCategories($categories); )
+U create.blade.php iz foldera 'blogg\resources\views\posts' doacemo <select> u formi ispod polja 'slug' u kom ce se postu pri kreiranju dodavati kategorija
+<select> Elementu  ce se name atribut zvati category_id da bi se podudario sa kolonom u 'posts' tabeli pa ce u store( ) metodu biti lakse upisati red
+Svakom <option> u <select> value atribut ce biti id iz 'categories' tabele 
+U store( ) metodu PostsControllera u koji se submituje forma za kreiranje posta prvo u validaciji dodajemo da je polje 'category_id' tj <select> obavezno i mora biti - 
+ - broj ( 'category_id' => 'required|integer' )  i dodajemo da ga upisuje u 'posts' tabelu ( $post->category_id = $request->category_id; )
+Zatim cemo u show.blade.php iz foldera 'blogg\resources\views\posts' koji prikazuje jedan zaseban post dodati i da mu prikazuje kategoriju, posto kad izvucemo -
+ - post preko Post.php modela koji ima metod category( ) koji vadi kategoriju posta nije potrebno zasebno vaditi kategoriju posta u show( ) metodu PostControllera -
+ -  radicemo samo u vjuu show.blade.php
+Sada cemo raditi na promeni kategorije pri editovanju, posto su nam opet potrebne sve kategorije a ne samo kategorija dodata  postu u edit( ) metodu  izvuci cemo ih -
+ -  iz 'categories' tabele ( $categories = Category::all()->lists('name', 'id'); ovo list sluzi da ih ubaci u array da ih lakse ubacimo u <select> u vjuu edit.blade.php ) i poslati -
+ -  ih sa postom koji se edituje u edit.blade.php iz foldera 'blogg\resources\views\posts'
+Na kraju u update( ) metodu koji prima unos u formu u edit.blade.php prvo validiramo category_id polje i upisujemo ga u 'posts' tabelu tj updateujemo je 
+ - ( 'category_id' => 'required|integer',  i   $post->category_id = $request->input('category_id'); )
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 34 : Part 34 - Many to Many Relationships [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=NQMmrqASZjQ&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=40
+Objasnjavao sta je many-to-many relacija i kako se ista pravi u Laravelu...
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 35 : Part 35 - Building Our Tag Model [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=tSmap9D-KCk&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=41
+NASTAVAK PRETHODNE LEKCIJE
+Dodavacemo Tagove postovima koji ce biti u zasebnoj tabeli i bice povezani sa 'posts' tabelom preko pivot tabele i bice medju njima many-to-many relacija -
+ - tj post ce moci da ima vise tagova i tag ce moci da bude dodat mnogim postovima
+U Post.php modelu dodacemo novi metod tags( ) u kom ce pisati: return $this->belongsToMany('App\Tag'); a u Tag.php modelu(koji cemo tek napraviti) bice metod -
+ - post(  ) u kom ce pisati isto za Post.php model
+U GIT BASH-u cemo komandom " php artisan make:model Tag --migration " napraviti model i migraciju za 'tags' tabelu
+Zatim cemo u Tag.php modelu, kao sto smo vec rekli napraviti, posts( ) metod u kom ce pisati:  return $this->belongsToMany('App\Post');	
+Ove 2 tabele bice povezne preko pivot tabele 'post_tag' (  ne moramo je navoditi u ovim relacijama u modelima Post.php i Tag.php post ce laravel automatski -
+ - pretpostaviti da se pivot tabela tako zove ali ako hocemo da je nazovemo drugacije moramo to navesti kao drugi parametar u posts( ) i tags( ) metodima tj u -
+ - belongsToMany( ) funkciji  )
+U migraciju za 'tags' tabelu dodacemo name kolonu - $table->string('name'); ,  i zatim cemo je migrirati komandom u GITBASH-u " php artisan migrate "
+Napravicemo migraciju za 'post_tag' komandom " php artisan make:migration create_post_tag_table " u GITBASHU  
+U migraciji za 'post_tag' tabelu dodacemo kolone id, post_id i tag_id i reci cemo da su post_id i tag_id foreign key-evi na id kolone u 'posts' i 'tags' tabelama -
+public function up(){
+        Schema::create('post_tag', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('post_id')->unsigned();
+            $table->foreign('post_id')->references('id')->on('posts');
+            $table->integer('tag_id')->unsigned(); 
+            $table->foreign('tag_id')->references('id')->on('tags');
+        });
+}
+i onda migriramo komandom u GITBASH-u " php artisan migrate "
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 36 : Part 36 - Starting our Tag CRUD [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=mL_7im7CBOE&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=42
+NASTAVAK PRETHODNE LEKCIJE
+Napravicemo resorce TagController komandom " php artisan make:controller TagController --resource " u GITBASH-u, dodacemo mu __construct u kom pise da -
+ - mora ici kroz middleware Auth tj da samo ulogovani mogu pristupati metodima kontrolera i na vrhu cemo reci da uveze Tag.php model: use App\Tag;
+Napravicemo folder 'tags' u folderu 'blogg\resources\views\' u kom ce biti vju index.blade.php koji c prikazivati sve tagove i imati formu za kreiranje novih tagova
+U index( ) metodu TagCOntrollera prvo ucitavamo sve tagove iz tags tabele i saljemo ih u vju index.blade.php iz foldera  'blogg\resources\views\tags', create( ) metod -
+ - cemo obrisati posto ce u index.blade.php koji prikazuje postojece tagove biti i forma za kreiranje novih
+Zatim cemo u store( ) metodu TagControllera raditi prvo validaciju unosa u formu u index.blade.php i upis novog taga u tabelu 'tags' ,  ceo store( ) metod : 
+      $this->validate($request, array('name' => 'required|max:255')); 	//prvo validacija unosa u formu u index.blade.php
+      $tag = new Tag; 		// upisi tag u tags tabelu 
+      $tag->name = $request->name;
+      $tag->save();
+      // upisi poruku session flash koju ce prikazati _messages.blade.php
+      Session::flash('success', 'New Tag was successfully Created.');
+      // redirectuj na index.blade.php iz foldera 'blogg\resources\views\tags'
+      return redirect()->route('tags.index');
+u routes.php dodacemo rute za TagController : Route::resource('tags', 'TagController', ['except' => ['create']]); (except=>create znaci da nema create rute posto nema -
+ - ni tog metoda u kontroleru jer index( ) metod radi njegov posao )
+U index.blade.php iz foldera 'blogg\resources\views\tags' napravicemo isto kao za categories, znaci levo je tabela koja prikazuje postojece tagove a desno je mala -
+ - forma sa unosom imena novog taga i submit btn ,  forma kad se sabmituje salje unos u store( ) metod TagControllera da upise red u 'tags' tabelu u bazi
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 37 : Part 37 - Adding Tag UI/UX [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=BNUYaLWdR04&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=43
+NASTAVAK PRETHODNE LEKCIJE
+Rad na dodavanju tagova postovima,  prvo cemo skinuti plugin koji omogucava da se doda vise tagova jednom postu sa URL-a : https://github.com/select2/select2
+Skinucemo paket i unzip-ovati ga i prebacicemo u 'public' folder nase aplikacije(blogg u htdocs-u) samo fajlove select2.min.js iz foldera 'select2-master\dist\js' i css -
+ - fajl select2.min.css iz foldera 'select2-master\dist\css' ,  ostali fajlovi ovog paketa nam ne trebaju i obrisacemo ih(ceo paket sam sacuvao na sladecoj lokaciji - 
+-  G:\IT\LARAVEL\select2-master) ,  select2.min.js ide u js folder public foldera a select2.min.css ide u css folder public foldera, dokumentacija za select2 plugin-
+ - http://select2.github.io/examples.html
+Ove fajlove cemo includovati u fajl create.blade.php i edit.blade.php iz foldera 'blogg\resources\views\posts' posto ih koristimo samo kad kreiramo ili editujemo post
+Prvo cemo u PostController-u u metodu create( ) koji ucitava create.blade.php za kreiranje novog posta izvuci sve tagove iz 'tags' tabele u bazi i poslati ih u vju da -
+ - bi mogli da budu prikazani u <select> -u u formi za kreiranje novog posta ($tags = Tag::all(); ,,- 
+- return view('posts.create')->withCategories($categories)->withTags($tags);   )
+A u create.blade.php cemo u formi ispod <select>-a za kategoriju posta dodati super moderan <select> za tagove koristeci select2 plugin ceo kod:
+{{ Form::label('tags', 'Tags:') }}
+   <select class="form-control select2-multi" name="tags[]" multiple="multiple">
+      @foreach($tags as $tag) {{--u category_id kolonu posts tabele upisujemo id kategorije--}}
+         <option value="{{ $tag->id }}">{{ $tag->name }}</option>
+      @endforeach
+  </select>
+obavezno dodati tag multiple="multiple" i name="tags[]" tj da name tag bude array [ ] 
+a na dnu fajla cemo napraviti  mali <script></script> i u njemu ce pisati : $('.select2-multi').select2(); tj pozvacemo metod select2( ) select2 plugina na elementu -
+ -  klase selec2-multi tj na <select> za dodavanje tagova posta i onda odjednom mozemo dodati vise tagova jednom postu 
+Kad se sabmituje forma za kreiranje novog posta request ide u store( ) metod PostController-a , necemo validirati, nego cemo posle dodavanja posta u 'posts' tabelu - 
+ - tj post->save( ) dodati sledece: $post->tags()->sync($request->tags, false);  I laravel ce sam upisati red u 'post_tag' tabelu tj vise redova ako smo postu dodali vise -
+ - tagova
+U show.blade.php iz foldera 'blogg\resources\views\posts' tj vju koji prikazuje jedan post dodacemo (ispod body-a posta) div koji ce prikazivati tagove(ako ih post ima) -
+<div class="tags">
+   @foreach($post->tags as $tag)
+       <span class="label label-default">{{ $tag->name }}</span>
+   @endforeach
+</div>  {{--kraj div-a .tags--}}
+U edit.blade.php za editovanje posta takodje moramo dodati <select> za dodavanje tagova , to cemo uraditi malo drugacije nego u create.blade.php tj koristicemo -
+ - HTML Collective plugin,  sve je isto samo malo drugacije napisano nego u create.blade.php :
+{{ Form::label('tags', 'Tags:', ["class" => "form-spacing-top"]) }}
+{{ Form::select('tags[]', $tags, null, ['class' => 'select2-multi', 'multiple' => 'multiple']) }}
+U edit( ) metodu PostCOntroller-a takodje moramo izvuci sve tagove iz tags tabele i poslati ih u edit vju ka array (posto sad koristimo HTML COllective):- 
+ - $tags = Tag::all()->lists('name', 'id'); (ovo ce poslati array kljuc id taga a vrednost name taga i lepo ce biti ubaceni u <select> u edit.blade.php) medjutim da bi user -
+ - mogao da odmah vidi tagove koji su vec dodati postu moracemo da napravimo ovo u jquery-ju, znaci u <script> </script> u edit.blade.php ispod -
+  - $('.select2-multi').select2(); cemo dodati novi red u kom ce pisati :  
+$('.select2-multi').select2().val({!! json_encode($post->tags()->getRelatedIds()) !!}).trigger('change');   i tako ce user moci da vidi koje tagove post vec ima dodate i da - 
+- doda nove ili ukloni ove u <select> -u za dodavanje tagova u formi za editovanje posta
+U update( ) metodu koji ce primiti podatke iz forme za editovanje posta u edit.blade.php cemo ispod upisa editovanog posta u posts tabelu tj $post->save( ) prvo -
+ - dodati if( ) koji proverava da li uopste ima nesto u $request->tags tj dali su postu dodati novi tagovi ili nisu( if(isset($request->tags)) ) i ako ih je imao mozda -
+ -  su obrisani pa je $request->tags prazan, ako post ima dodate tagove onda se oni upisuju u 'post_tag' tabelu i ako su neki obrisani brisu se iz 'post_tag' tabele ovako:  -
+ - $post->tags()->sync($request->tags); kao i pri kreiranju posta u store( ) metodu stim sto ovoga puta sync( ) metodu necemo dati drugi argument 'false' posto ovoga - 
+ - puta dozvoljavamo override u 'post_tag' tabeli tj da obrise red ako je user u formi za editovanje uklonio vec postojeci tag postu , false argument je to branio ,
+ - ako je $request->tag prazan tj ulazimo u else{ } onda ovako pisemo sync( ) metod: $post->tags()->sync(array()); tj dajemo mu kao argument prazan array i on ce tom - 
+ - postu obrisati sve dodate tagove tj u 'post_tag' tabeli obrisace sve redove kojima je post_id kolona jednaka id koloni editovanog posta iz 'posts' tabele(malo zapetljano...)
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 38 : Part 38 - Show, Edit, Update our Tags [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=haMQWBi2O14&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=44
+NASTAVAK PRETHODNE LEKCIJE
+Rad na prikazivanju i editovanju zasebnih tagova
+Prvo cemo u folderu 'blogg\resources\views\tags' napraviti vju show.blade.php koji ce prikazivati 1 tag kad se u index.blade.php iz istog foldera klikne na neki od -
+-  prikazanih tagova koji su linkovi, zatim cemo u show ( ) metodu TagControllera izvuci taj tag iz 'tags'  tabele u bazi i poslati ga u show.blade.php za prikaz jednog taga - 
+- koji smo upravo kreirali, u njemu ide klasicno @extends('main'), section title section content...
+U @section('content') u <h1> prikazujemo ime taga i broj postova kojima je dodat - <h1>{{ $tag->name }} Tag <small>{{ $tag->posts()->count() }} Posts</small></h1> 
+$tag->posts()->count() ce prebrojati postove kojima je dodat ,  koristi se posts(  ) metod Tag.php modela posto imaju many-to-many relaciju Tag.php i Post.php
+pored ce biti btn za edit a ispod ce u tabeli  biti izlistani svi postovi kojima je dodat ,  tabela ima kolone # tj id posta, title, tags( kolona koja prikazuje sve tagove dodate postu)
+ - i na kraju kolona u kojoj je btn koji ce kad se klikne prikazivati show.blade.php iz foldera 'blogg\resources\views\posts' tj vju koji prikazuje jedan post
+Pogledaj show.blade.php iz foldera  'blogg\resources\views\tags' ako te zanima tabele ,  nema nista novo osim mozda ovog drugog @foreacha koji prikazuje sve tagove -
+  - posta
+U index.blade.php iz foldera 'blogg\resources\views\tags' tj vjuu koji prikazuje sve postojece tagove i ima formu za dodavanje novog cemo u tabeli koja prikazuje sve - 
+ -  postojece tagove u koloni koja prikazuje ime taga od nje napraviti link koji vodi ka vjuu za prikaz taga tj show.blade.php 
+Sada u folderu 'blogg\resources\views\tags' pravimo vju edit.blade.php koji ce sluziti za editovanje taga i bice prikazan kad klikneo btn Edit u show.blade.php koji prikazuje - 
+ - jedan tag i postove kojima je dodat
+U edit.blade.php je samo forma ( ovako se otvara  {!! Form::model($tag, ['route' => ['tags.update', $tag->id], 'method' => 'PUT']) !!} ) i u njoj je samo jedan input za name taga - 
+ - i submit btn ,  posto smo radili otvaranje forme  sa Form::model a ime inputa je name kao i kolona u tags tabeli po difoltu ce biti popunjeno sadasnjom vrednoscu iz tabele
+Kad se submituje forma salje request u update( ) metod TagsControllera koji prvo vadi taj tag po $id koji je stigao u requestu zatim validira request(required, max:255) - 
+ - onda podesava name kolonu tags tabele(posto i nema drugih kolona osim te i id) i onda upisuje promenu u tabelu ,  na samom kraju upisuje Session::flash poruku i -
+ - ponovo poziva rutu tags.show koja ce prikazati taj tag(sada izmenjen),  ceo metod:
+public function update(Request $request, $id){
+      $tag = Tag::find($id); 	// izvuci tag koji updateujemo 
+      $this->validate($request, ['name' => 'required|max:255']); 	//validiraj pristigli unos
+      $tag->name = $request->name; 	// podesi name kolonu (posto je jedina...)
+      $tag->save(); 	// updateuj tj save-uj
+      Session::flash('success', 'Tag was successfully updated.');		// podesi poruku koju ce prikazati _messages.blade.php
+      return redirect()->route('tags.show', $tag->id);       // redirectuj na show.blade.php tj na rutu 'tags.show' koja prikazuje tag koji smo updateovali
+}
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 39 : Part 39 - Deleting Tags Safely [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=ry7cc4kver4&index=45&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+NASTAVAK PRETHODNE LEKCIJE
+Brisanje tagova i brisanje redova u post_tag tabeli
+Prvo cemo u destroy( ) metodu PostControllera dodati red koji kaze $post->tags()->detach();  i on sluzi da kada se obrise neki post u 'post_tag' tabeli obrise sve redove - 
+ - kojima je post_id kolona jednaka id - u posta koji upravo brisemo
+Sada cemo raditi na brisanju tagova, prvo cemo u show.blade.php iz foldera 'blogg\resources\views\tags' tj vjuu koji prikazuje jedan tag i postove kojima je dodat dodati - 
+ - btn Delete, zapravo to je mala forma koja se sastoji od jednog btn-a i sluzi da obrise tag i salje request u destroy() metod TagControllera, ovako se otvara - 
+ -  {{ Form::open(['route' => ['tags.destroy', $tag->id], 'method' => 'DELETE']) }}
+U destroy( ) metodu nalazimo tag u 'tags' tabeli po $id-u , zatim detach-ujemo posts() tj brisemo red ili redove iz 'post_tag' tabele kojima je tag_id kolona jednaka id -u - 
+ - taga koji brisemo , ceo metod - 
+public function destroy($id){
+      $tag = Tag::find($id);
+      $tag->posts()->detach(); 	// ovo brise redove u 'post_tag' tabeli kojima je tag_id = id-u taga koji brisemo
+      $tag->delete();
+      Session::flash('success', 'Tag was successfully updated.');		// podesi poruku koju ce prikazati _messages.blade.php      
+      return redirect()->route('tags.index', $tag->id);         // redirectuj na index.blade.php tj na rutu 'tags.index' koja prikazuje  sve tagove
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 40 : Part 40 - Sending Email from Contact Form [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=09rshFmGwc0&index=46&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Prvo cemo napraviti rutu koja ce se koristiti kad se submituje forma u contact.blade.php iz foldera 'blogg\resources\views\pages' - 
+ - Route::post('contact', 'PagesController@postContact'); (vju contact.blade.php je napravljen otprilike na pocetku tutorijala i sluzi da nam kao user posalje poruku tj mail)
+U contact.blade.php napravicemo otvaranje forme da izgleda ovako - <form action="{{ url('contact') }}" method="POST"> , tako da ce se koristiti ruta koju smo upravo -
+ - kreirali
+U PagesController-u cemo ispod metoda getContact( ) koji ucitava vju contact.blade.php napraviti metod postContact( ) koji ce primati request kad se popuni forma za - 
+ - slanje maila u contact.blade.php, takodje cemo na vrhu kontrolera  uvesti klase za request posto ce metod koji pravimo primati requeste iz forme u contact.blade.php - 
+- ( use Illuminate\Http\Request;   use App\Http\Requests; ) takodje uvesti klasu za mail( use Mail; ) i session ( use Session; )
+U metodu postContact( ) prvo radimo validaciju email, subject i message polja iz forme koja je submitovana u contact.blade.php -
+ - ( $this->validate($request, ['email' => 'required|email',  'subject' => 'min:3',  'message' => 'min:10']) )
+posto ce mail koji ce nam user slati zapravo biti jedan vju napravicemo u folderu 'blogg\resources\views\' folder 'emails' i u njemu vju contact.blade.php
+U postContact( ) metodu cemo posle validacije napraviti array $data u kom ce biti ceo $request koji je stigao iz kontakt forme i taj array se salje u vju contact.blade.php - 
+ - iz emails foldera da napravi mail , u contact.blade.php vjuu elementima arraya se pristupa kao da su kljucevi varijable($email, $subject, $bodyMessage) 
+$data = array(
+      'email' => $request->email,
+      'subject' => $request->subject,
+      'bodyMessage' => $request->message // VAZNO ne sme se dati naziv kljucu 'message' zato sto je to laravelova zasticena varijabla tako da cemo mi message zvati -
+                                                                         // - bodyMessage
+ ); 
+Zatim ovako saljemo mail:
+Mail::send('emails.contact', $data, function($message) use ($data){   	// ubacujemo $data array u callback da bi mogli da mu pristupamo
+      $message->from($data['email']);	// ovo nisam siguran cemu sluzi
+      $message->to('vladasarac@hotmail.com');	// ovo je obavezno da bi znao kome da salje mail , mogu ovde da napisem npr lacparacku@yahoo.com i tamo ce slati
+      $message->subject($data['subject']); 	 	// ovo ce biti naslov maila
+});
+Ispod se radi session flash i redirect, pogledaj u PagesControleru (nista novo)
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 41 : Part 41 - Adding Comments [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=z-KyDpG8j34&index=47&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Napravicemo model i migraciju za 'comments' tabelu i sve sto ide uz to komandom " php artisan make:model Comment --migration"
+U migraciji za 'comments' tabelu dodacemo kolone :  name, email, comment, approved i post_id koja ce biti foreign key koji referise na id kolonu 'posts' tabele -
+ - $table->foreign('post_id')->references('id')->on('piosts')->onDelete('cascade');
+Zapravo ovo dodavanje kljuca ide u zasebnu Schema-u (pogledaj migraciju...)
+U Post.php modelu pravimo metod comments( ) u kom pise return $this->hasMany('App/Comment'); a u Comment.php modelu pravimo metod post( ) u kom pise - 
+- return $this->belongsTo('App\Post'); i tako smo napravili one-to-many relaciju izmedju 'posts' i 'comments' tabelea jer jedan post moze imati vise komentara
+Zatim u GIT BASH-u kucamo komandu " php artisan make:controller CommentsController --resource " da bi napravili resorce kontroler za rad sa komentarima
+Necemo praviti resource rute, nego cemo za pocetak napraviti rutu za upisivanje komentara u bazu koja ce pozivati store( ) metod CommentsController-a
+Route::post('comments/{post_id}', ['uses' =>'CommentsController@store', 'as' => 'comments.store']);
+U vjuu single.blade.php iz foldera 'htdocs\blogg\resources\views\blog' koji useru koji ne mora biti ulogovan (znaci ovo nije jedan od admin vjuova) prikazuje jedan zaseban -
+ - post dodajemo formu koja kad se submituje poziva rutu koju smo malopre napravili (comments.store) koja salje request store( ) metodu CommentsControllera
+Forma ima polja name, email, comment i submit btn takodje ce slati id posta posto i to mora da se upise u 'comments' tabeluu kolonu post_id
+Zatiim u store metodu CommentsControllera prvo u zagradu dodajemo i argument $post_id postio ce i to stici od forme - public function store(Request $request, $post_id)
+zatim radimo validaciju unosa u formu za dodavanje kometara iz single.blade.php iz foldera 'htdocs\blogg\resources\views\blog' , zatim izvlacimo post iz 'posts' tabele ciji -
+ - je id stigao sa requestom iz forme ( $post = Post::find($post_id); ) jer nam on treba da popunimo post_id kolonu 'comments' tabele , koristicemo metod associate..
+zatim instanciramo model Comment i popunjavamo kolone i na kraju upisujemo red
+$comment = new Comment();
+$comment->name = $request->name;
+$comment->email = $request->email;
+$comment->comment = $request->comment;
+$comment->approved = true;
+$comment->post()->associate($post); // ovo je valjda post_id kolona koja je foreign key na id kolonu 'posts' tabele
+// upisi komentar u 'comments' tabelu
+$comment->save();
+Na kraju Session flash i redirec na blog.single(opet) tj na stranicu na kojoj smo i bili (ova ruta blog.single koristi slug pa joj to dajemo kao argument)
+Session::flash('success', 'Comment was added');
+return redirect()->route('blog.single', [$post->slug]);
+Jos samo da u single.blade.php u kom se i dodaje komentar pre forme dodamo prikaz postojecih komentara dodatih postu, komentarima prisupamo preko comments( ) -
+ - metoda u Post.php modelu
+ @foreach($post->comments as $comment)
+    <div class="comment">
+          <p><strong>Name:</strong>{{ $comment->name }}</p>
+          <p><strong>Comment:</strong>{{ $comment->comment }}</p><hr>       
+    </div>
+@endforeach
+NASTAVAK U SLEDECOJ LEKCIJI
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 41½ : Part 41½ - Styling our Comments [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=0QvTHd0H22c&index=48&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+NASTAVAK PRETHODNE LEKCIJE ,  stilizovanje prikaza komentara u single.blade.php iz foldera 'blogg\resources\views\blog'
+Lekcija nema veze sa laravelom ,  samo stilizovanje u fajlu style.css iz foldera 'blogg\public\css', prikazuje se ime komentatora, datum dodavanja komentara i sam komentar
+Prikazuje se i slika (koja ne postoji) tako da je ovaj odlucio da koristimo neki sajt "gravatar.com" koji kao generise sliku tj ako user ima nalog na tom gravatar.com onda -
+ - prikazuje tu sliku ako nema prikazuje logo gravatar.com -a bzvz...
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 42 : Part 42 - Managing Comments [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=ouXtJe9ps3A&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=49
+Rad na prikazu komentara u backendu, i njihovo brisanje itd...
+Prvo cemo u show.blade.php iz foldera 'blogg\resources\views\posts' tj stranica koja adminu prikazuje jedan post dodati div #backend-comments koji ce prikazivati -
+ - komentare dodate postu i koliko ih ima, u tabeli koja prikazuje komentare u zadnjoj koloni su dugme za edit komentara i delete komentara
+Dodacemo ove rute u routes.php (koje pozivaju metode CommentsControllera, za prikaz edit forme za update kad se popuni ta forma i za destroy tj delete)
+Route::get('comments/{id}/edit', ['uses' => 'CommentsController@edit', 'as' => 'comments.edit']);
+Route::put('comments/{id}', ['uses' => 'CommentsController@update', 'as' => 'comments.update']);
+Route::delete('comments/{id}', ['uses' => 'CommentsController@destroy', 'as' => 'comments.destroy']);
+Route::get('comments/{id}/delete', ['uses' => 'CommentsController@delete', 'as' => 'comments.delete']);
+U edit( ) metodu CommentsControllera izvlacimo komentar ciji id je stigao kad je koliknuto dugme u tabeli koja prikazuje komentare za edit komentara preko rute -
+ - comments.edit i saljemo izvuceni komentar u vju edit.blade.php iz foldera 'resources\views\comments' koji cemo upravo napraviti 
+   $comment = Comment::find($id); 
+   return view('comments.edit')->withComment($comment);
+U vjuu edit.blade.php iz foldera 'blogg\resources\views\comments' pravimo formu za editovanje komentara koja izgleda ovako, kad se submituje salje unos u update() -
+ - metod CommentsControllera preko rute comments.upadate, polja za name i email su disable-ovana (ne znam zasto ih je stavio u formu onda)
+{{ Form::model($comment, ['route' => ['comments.update', $comment->id], 'method' => 'PUT']) }}
+    {{ Form::label('name', 'Name:') }}
+    {{ Form::text('name', null, ['class' => 'form-control', 'disabled' => '']) }}   {{--disabled znaci da ovo polje ne mozemo editovati--}}
+    {{ Form::label('email', 'Email:') }}
+    {{ Form::text('email', null, ['class' => 'form-control', 'disabled' => '']) }}    {{--disabled znaci da ovo polje ne mozemo editovati--}}
+    {{ Form::label('comment', 'Comment:') }}
+    {{ Form::textarea('comment', null, ['class' => 'form-control']) }}
+    {{ Form::submit('Update Comment', ['class' => 'btn btn-block btn-success']) }}
+  {{ Form::close() }}
+U update( ) metodu CommentsContrrollera validiramo samo unos u polje comment(posto su za name i email ionako disableovana polja i upisujemo updateovan komentar -
+ - u tabelu 'comments') ceo update( )  metod
+      $comment = Comment::find($id); //nadji komentar koji updateujemo
+      $this->validate($request, array('comment' => 'required')); // validira se samo polje comment iz forme posto su osta disable-ovana
+      $comment->comment = $request->comment;
+      $comment->save();
+      // session flash poruka i redirect na show.blade.php koji prikazuje post ciji komentar je editovan 
+      Session::flash('success', 'Comment Updated!');
+      return redirect()->route('posts.show', $comment->post->id);
+Da bi obrisali komentar kad se klikne delete ikonica u tabeli koja prikazuje komentare u show.blade.php za prikaz jednog komentara moracemo da napravimo novi metod -
+ - delete ( ) u CommentsControlleru koji ce da izvuce komentar iz baze i da ga posalje u vju delete.blade.php iz foldera 'blogg\resources\views\comments' u kom ce biti -
+ -  konfirmacija brisanja tj forma koja kad se sabmituje ce pozivati destroy( ) metod Comments Contrololera da stvarno obrise komentar
+Forma u delete.blade.php iz foldera 'blogg\resources\views\comments'
+{{ Form::open(['route' => ['comments.destroy', $comment->id], 'method' => 'DELETE']) }}
+      {{ Form::submit('YES DELETE THIS COMMENT', ['class' => 'btn btn-block btn-danger']) }}
+{{ Form::close() }}
+destroy( ) metod CommentsControllera - 
+$comment = Comment::find($id);
+$post_id = $comment->post->id; // izvuci id posta koji se brise posto nam treba da ucitamo vju show.blade.php a komentar vise nece postojati kad radimo redirect
+$comment->delete(); // obrisi komentar
+// session flash poruka i redirect na show.blade.php koji prikazuje post ciji komentar je izbrisan 
+Session::flash('success', 'Comment Deleted!');
+return redirect()->route('posts.show', $post_id);
+Na kraju cemo iz CommentsControllera obrisati metode index( ) , posto se komentari prikazuju sa postovima a ne zasebno, zatim create( ) posto je forma za kreiranje posta -
+  - takodje u vjuu koji prikazuje post i show( ) posto se komentari prikazuju sa postom i koristimo $comments metod Post.php modela da ih prikazujemo,
+Na kraju cemo posto u CommentsControlleru neki metodi trebaju login(za editovanje i brisanje ) a neki ne (za store( ) posto svako moze da komentarise) napraviti -
+ - __construct( ) metod na vrhu u kom cemo reci da svi metodi osim store( )  moraju koristiti auth middleware 
+public function __construct(){
+      $this->middleware('auth', ['except' => 'store']);
+}
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 43 : Part 43 - Adding a WYSIWYG Editor [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=3jwe6PL1BqA&index=50&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+Dodavanje plug-ina kojim ce se koristiti za formatiranje teksta posta pri unosu ,  da bi imali lepo formatirane postove
+Plugin se zove tinyMCE i skida se sa https://www.tinymce.com/download/ ,  tamo je kod koji treba da iskopiramo u nas fajlove create.blade.php i edit.blade.php iz foldera -
+-  'blogg\resources\views\posts' a ovo treba da ubacimo u @section('stylesheet')  - <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+ispod toga u <script> tagu cemo podesiti tinyMCE tj reci cemo koje funkcionalnosti da ima i na koji element forme da se okaci(textarea u ovom slucaju),  -  
+<script>
+    tinymce.init({
+      selector: 'textarea',
+      height : 700,
+      plugins: 'link code image',
+     toolbar: 'undo redo | styleselect | bold italic bullist, numlist| link image'
+    });
+</script>
+Posto smo ranije dodali parsley.js validaciju i ona se svadja sa ovim tinyMCE pluginom kad validira unos u textarea ,  za textarea cemo disejblovati parsley tj obrisacemo 
+ - required tag <textarea> elementa
+Ovaj nije dodao dodavanje slika ,  ali ja jesam samo sto ovo nije upload nego mozemo samo ubaciti slike koje su vec na internetu tj njihovu adresu i dodao sam mu visinu -
+ - 700 px posto mi je ona difolt varijanta bila mala
+U sledecem videu cemo raditit na prikazu posta posto je sada unet u bazu sa sve HTML-om koji je tinyMCE izgenerisao i tako ga i priakzuje
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 44 : Part 44 - Output HTML from Database [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=VgxDWv-VUAA&index=51&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx
+NASTAVAK PRETHODNE LEKCIJE
+Posto je zaboravio da ga doda u edit.blade.php iz foldera 'blogg\resources\views\posts' posto i kad se edituje post treba da imamo ovo za textarea koja prikazuje body - 
+ - posta tako da cemo samo copy-paste-ovati iz crerate.blade.php iz istog foldera 
+Da bi post bio prikazan onako kako je unet u formu tj bez HTML tagova koje mu je tinyMCE dodao u show.blade.php iz foldera 'blogg\resources\views\posts' koji prikazuje -
+ -  jedan post autoru napisacemo - <p class="lead">{!! $post->body !!}</p><hr> umesto - <p class="lead">{{ $post->body }}</p><hr> isto cemo utraditi i u single.blade.php -
+ - iz foldera 'blogg\resources\views\blog' koji prikazuje jedan post obicnom posetiocu sajta - <p>{!! $post->body !!}</p> umesto <p>{{ $post->body }}</p>
+Onda na welcome.blade.php iz foldera 'blogg\resources\views\pages' koji je pocetna stranica sajta koja prikazuje zadnjih nekoliko postova i samo 300 karaktera body-ja -
+ -  i link 'Read More' ispod takodje menjamo da ne bi prikazao HTML tagove tako sto koristimo php metod strip_tags,  ovako izgleda sada
+<p>{{ substr(strip_tags($post->body), 0, 300) }} {{ strlen(strip_tags($post->body)) > 300 ? "..." : "" }}</p>
+ovako je bilo pre
+<p>{{ substr($post->body, 0, 300) }} {{ strlen($post->body) > 300 ? "..." : "" }}</p>
+Isto radimo i u index.blade.php fajlu iz  foldera 'blogg\resources\views\blog' , to je stranica koja se pojavi kad kliknemo link 'Blog' u navigaciji ,  sad je ovako
+<p>{{ substr(strip_tags($post->body), 0, 250) }}{{ strlen(strip_tags($post->body)) > 250 ? '...' : ""}}</p>
+a bilo je ovako
+<p>{{ substr($post->body, 0, 250) }}{{ strlen($post->body) > 250 ? '...' : ""}}</p>
+Na kraju treba dodati i u index.blade.php iz foldera 'blogg\resources\views\posts' koji adminu tj autoru prikazuje u tabeli postove 
+sad je ovako 
+<td>{{ substr(strip_tags($post->body), 0, 50) }}{{ strlen(strip_tags($post->body)) > 50 ? "..." : "" }}</td> 
+a ovako je bilo pre
+<td>{{ substr($post->body, 0, 50) }}{{ strlen($post->body) > 50 ? "..." : "" }}</td> 
+U sledecem videu prica o sigurnosti posto ovaj plugin (tinyMCE) to malo sjebava pa treba nesto budziti
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 45 : Part 45 - Security Concerns with WYSIWYG Editors [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=_md2zRrPAhA&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=52
+Posto preko tinyMCE-a hakeri mogu svasta da nam ubace u bazu sdada cemo instralirati laravelov neki library koji to onemogucava ,  idemo na ovaj link -
+ - https://github.com/mewebstudio/Purifier, i odatle cemo skinuti sta treba (program se zapravo zove HTML purifier a ovo je verzija za laravel) sada kucamo ovu komandu -
+ - u GITBASH " composer require mews/purifier " koja ce povuci ovaj library da bi ga laravel instalirao ,  zatim ovo - ' Mews\Purifier\PurifierServiceProvider::class, ' dodaj-
+ - emo u fajl app.php iz foldera 'blogg\config' u providers array ,  a ovo - ' 'Purifier' => Mews\Purifier\Facades\Purifier::class, ' u isti fajl u array aliases
+Prvo cemo uvesti Purifier klasu na vrh PostsControllera " use Purifier; "
+Sada u PostsControlleru u metodu store( ) cemo korisdtiti ovaj library da ocistimo unos iz body elementa forme tako sto cemo umesto ovog -  
+$post->body = $request->body;
+napisati ovo  - 
+$post->body = Purifier::clean($request->body);
+Isto to u update( ) metodu posto se i tu koristi tinyMCE plugin ovako je bilo
+$post->body = $request->input('body'); 
+ovako je sada
+$post->body = Purifier::clean($request->input('body')); 
+Sada mozemo unositi bilo sta u body element forme bez bojazni da ce neki maliciozni kod sjebati bazu itd... Stvar sa ovim je u tome sto ce dozvoliti da se unose HTML -
+ - tagovi u bazu bez problema posto tinyMCE stavlja oko teksta HTML tagove ali nece dozvoliti npr<script> tag ili nesto maliciozno
+Posto purifier ne dozvoljava po difoltu recimo <h1> , <h2> tagove i slicno sada moramo podesiti da i to radi sada cemo kucati komandu u GITBASHU -
+ - " php artisan vendor:publish --provider="Mews\Purifier\PurifierServiceProvider" " koja ce napraviti fajl purifier.php u folderu 'blogg\config' u kom cemo moci da podesimo -
+ - purifier i tamo mozemo navesti koji su HTML tagovi dozvoljeni (pogledaj 28 liniju tog fajla), da bi mogli da embedujemo youtube video treba u koontroleru kao drugi -
+ - parametar da napisemo 'youtube' sada u store i update metodima pise ovo - 
+ store
+$post->body = Purifier::clean($request->body, 'youtube');
+upate
+$post->body = Purifier::clean($request->input('body'), 'youtube'); 
+
+//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Lekcija 46 : Part 46 - Image Upload for Posts [How to Build a Blog with Laravel 5 Series]
+Link :  https://www.youtube.com/watch?v=N_i3UFw0_84&list=PLwAKR305CRO-Q90J---jXVzbOd4CDRbVx&index=53
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
